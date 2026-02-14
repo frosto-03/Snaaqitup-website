@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snaaqitup - Fresh Flavors Delivered</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E85A2A;
+            --secondary: #FFA559;
+            --accent: #FFE5B4;
+            --dark: #2C3639;
+            --light: #FFF8F0;
+            --cream: #FFF5E6;
+            --success: #4CAF50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--dark);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: lowercase;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: var(--cream);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+            opacity: 0;
+        }
+
+        .about.visible {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            color: var(--dark);
+            line-height: 1.8;
+            margin-top: 2rem;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 5rem 2rem;
+            background: var(--cream);
+        }
+
+        .menu-category {
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+        }
+
+        .category-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title span {
+            background: var(--cream);
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-title:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-image:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(-50%, -50%); }
+            50% { transform: translate(-30%, -30%); }
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .menu-item-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Order Form Section */
+        .order-section {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-placeholder {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            border: 3px dashed var(--secondary);
+        }
+
+        .form-placeholder p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .form-placeholder code {
+            display: block;
+            background: var(--cream);
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 165, 89, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">snaaqitup</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#order">Order</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Fresh Flavors,<br>Fast Delivery</h1>
+            <p>Delicious meals crafted with love, delivered to your doorstep</p>
+            <a href="#order" class="cta-button">Order Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about reveal">
+        <h2 class="section-title">About Snaaqitup</h2>
+        <p class="about-text">
+            At Snaaqitup, we believe every meal should be an experience. From our carefully crafted appetizers 
+            to our hearty main courses and indulgent desserts, each dish is prepared with the finest ingredients 
+            and a passion for flavor. Whether you're feeding your family or treating yourself, we deliver 
+            restaurant-quality meals straight to your door.
+        </p>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <!-- Appetizers -->
+        <div class="menu-category reveal">
+            <h2 class="category-title"><span>🥟 Appetizers</span></h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">🥟</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Crispy Spring Rolls</h3>
+                        <p class="menu-item-desc">Golden fried rolls filled with fresh vegetables and aromatic spices</p>
+                        <div class="menu-item-price">₹150</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🧆</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Paneer Tikka</h3>
+                        <p class="menu-item-desc">Marinated cottage cheese grilled to perfection with bell peppers</p>
+                        <div class="menu-item-price">₹180</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍤</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Garlic Prawns</h3>
+                        <p class="menu-item-desc">Succulent prawns sautéed in butter, garlic, and herbs</p>
+                        <div class="menu-item-price">₹250</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🥙</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Chicken Samosas</h3>
+                        <p class="menu-item-desc">Crispy pastry pockets filled with spiced chicken and peas</p>
+                        <div class="menu-item-price">₹120</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🧀</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Cheese Nachos</h3>
+                        <p class="menu-item-desc">Tortilla chips loaded with melted cheese, salsa, and jalapeños</p>
+                        <div class="menu-item-price">₹160</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍄</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Stuffed Mushrooms</h3>
+                        <p class="menu-item-desc">Button mushrooms stuffed with cheese and herbs, baked golden</p>
+                        <div class="menu-item-price">₹190</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Courses -->
+        <div class="menu-category reveal">
+            <h2 class="category-title"><span>🍛 Main Courses</span></h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">🍛</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Butter Chicken</h3>
+                        <p class="menu-item-desc">Tender chicken in rich tomato gravy with cream and butter</p>
+                        <div class="menu-item-price">₹320</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍝</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Pasta Alfredo</h3>
+                        <p class="menu-item-desc">Creamy fettuccine with parmesan cheese and garlic</p>
+                        <div class="menu-item-price">₹280</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍜</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Hakka Noodles</h3>
+                        <p class="menu-item-desc">Stir-fried noodles with vegetables in savory soy sauce</p>
+                        <div class="menu-item-price">₹220</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍕</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Farmhouse Pizza</h3>
+                        <p class="menu-item-desc">Fresh veggies, mozzarella, and herbs on thin crispy crust</p>
+                        <div class="menu-item-price">₹350</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🥘</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Hyderabadi Biryani</h3>
+                        <p class="menu-item-desc">Fragrant basmati rice layered with spiced meat and saffron</p>
+                        <div class="menu-item-price">₹380</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🥗</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Grilled Chicken Salad</h3>
+                        <p class="menu-item-desc">Fresh greens with grilled chicken, avocado, and vinaigrette</p>
+                        <div class="menu-item-price">₹290</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍲</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Paneer Butter Masala</h3>
+                        <p class="menu-item-desc">Cottage cheese cubes in creamy tomato-based curry</p>
+                        <div class="menu-item-price">₹270</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍗</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Tandoori Chicken</h3>
+                        <p class="menu-item-desc">Yogurt-marinated chicken roasted in traditional tandoor</p>
+                        <div class="menu-item-price">₹340</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍔</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Classic Burger</h3>
+                        <p class="menu-item-desc">Juicy beef patty with cheese, lettuce, and secret sauce</p>
+                        <div class="menu-item-price">₹260</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-category reveal">
+            <h2 class="category-title"><span>🍰 Desserts</span></h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">🍰</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Chocolate Brownie</h3>
+                        <p class="menu-item-desc">Rich, fudgy brownie with chocolate chips and vanilla ice cream</p>
+                        <div class="menu-item-price">₹150</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍮</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Crème Brûlée</h3>
+                        <p class="menu-item-desc">Silky custard with caramelized sugar crust</p>
+                        <div class="menu-item-price">₹180</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍨</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Kulfi Falooda</h3>
+                        <p class="menu-item-desc">Traditional Indian ice cream with vermicelli and rose syrup</p>
+                        <div class="menu-item-price">₹120</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🥧</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Apple Pie</h3>
+                        <p class="menu-item-desc">Warm spiced apples in buttery crust, served with cream</p>
+                        <div class="menu-item-price">₹160</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍩</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Gulab Jamun</h3>
+                        <p class="menu-item-desc">Soft milk dumplings soaked in sweet cardamom syrup</p>
+                        <div class="menu-item-price">₹100</div>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image">🍓</div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-name">Strawberry Cheesecake</h3>
+                        <p class="menu-item-desc">Creamy cheesecake with fresh strawberry compote</p>
+                        <div class="menu-item-price">₹190</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="order" class="order-section reveal">
+        <div style="text-align: center;">
+            <h2 class="section-title">Place Your Order</h2>
+        </div>
+        <div class="form-container">
+            <div class="form-placeholder">
+                <p><strong>📝 Embed Your Google Form Here</strong></p>
+                <p>After creating your Google Form, get the embed code:</p>
+                <code>
+                    1. Open your Google Form<br>
+                    2. Click "Send" button<br>
+                    3. Click the &lt;/&gt; (Embed) icon<br>
+                    4. Copy the iframe code<br>
+                    5. Replace this placeholder with that code
+                </code>
+                <p style="margin-top: 1.5rem; color: #666;">
+                    Example: &lt;iframe src="YOUR_FORM_URL" width="100%" height="1200"&gt;&lt;/iframe&gt;
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Snaaqitup</h3>
+                <p>Fresh flavors delivered with love. Your satisfaction is our priority.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="WhatsApp">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#menu">Our Menu</a>
+                <a href="#order">Order Online</a>
+                <a href="#about">About Us</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>📞 +91 98765 43210</p>
+                <p>📧 hello@snaaqitup.com</p>
+                <p>📍 Hyderabad, Telangana</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 11 AM - 10 PM</p>
+                <p>Saturday - Sunday: 10 AM - 11 PM</p>
+                <p style="margin-top: 1rem; color: var(--secondary);">⚡ Fast delivery in 30-45 mins</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Snaaqitup. All rights reserved. Made with ❤️ in Hyderabad</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 100;
+
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Check on load
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 30px rgba(255, 107, 53, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(255, 107, 53, 0.1)';
+            }
+        });
+
+        // Menu item click effect
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const name = this.querySelector('.menu-item-name').textContent;
+                const price = this.querySelector('.menu-item-price').textContent;
+                
+                // You can add to cart functionality here
+                console.log(`Selected: ${name} - ${price}`);
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
