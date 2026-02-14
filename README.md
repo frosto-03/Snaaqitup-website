@@ -1,1 +1,1 @@
-# Snaaqitup-website
+#index.html
